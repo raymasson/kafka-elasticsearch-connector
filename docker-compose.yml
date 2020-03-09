@@ -25,6 +25,14 @@ services:
       - "9300:9300"      
     environment:
       - xpack.security.enabled=false
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
 
   connect:
     image: confluentinc/cp-kafka-connect:3.3.0
